@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/index.css">
+    <title>Developers Community</title>
+</head>
+
+<body>
+    <header>
+        <p>
+            Hello, Developers and Programmer
+            <span style="color: blue; font-family: sans-serif;" id="app"></span>
+            <span style="color: rgb(37, 37, 175); font-family: sans-serif;" id="app-demo"></span>
+        </p>
+        <h2 style="text-align: center; font-family: sans-serif; color: white; text-decoration: underline;">
+            Subscribe to Newletters
+        </h2>
+    </header>
+
+
+    <div class="container">
+        <form id="myFormData" onsubmit="return validateFormData()">
+            <div class="form-group">
+                <input type="email" placeholder="Enter your Email" name="email" id="email">
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <input type="text" placeholder="Enter you First Name" name="fname" id="fname">
+            </div>
+
+            <br>
+            <p id="error-message" style="color: red; font-family: sans-serif; font-weight: bold;;"></p>
+            <!-- Error message paragraph -->
+
+            <button type="submit">Subscribe it's free</button>
+        </form>
+    </div>
+
+    <script src="/config/input-validation.js"></script>
+    <script src="/config/script.js"></script>
+    <script src="/index.js"></script>
+</body>
+
+</html>
