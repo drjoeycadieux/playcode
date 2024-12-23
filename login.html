@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/input.css">
+    <title>Login - Community</title>
+</head>
+
+<body style="padding: 0; margin: 0;">
+    <header
+        style="padding: 52px; color: white; font-family: sans-serif; font-weight: bold; font-size: 26px; background-color: rgb(11, 37, 85);">
+        <p style="text-align: center;">
+            Login to Your Account
+        </p>
+    </header>
+
+    <br>
+
+    <div class="container" style="text-align: center; margin: 50px;">
+        <form id="loginFormContainer" onsubmit="return validateLoginInfo()">
+            <div class="form-group">
+                <input type="email" placeholder="Enter your email" name="signInEmail" id="signInEmail">
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <input type="password" placeholder="Enter your password" name="signInPassword" id="signInPassword">
+            </div>
+
+
+            <br>
+            <p id="error-message"
+                style="color: red; font-family: sans-serif; font-weight: bold; font-size: 23px; text-decoration:  underline;">
+            </p>
+            <!-- Error message paragraph -->
+
+            <button type="submit">Login</button>
+        </form>
+        <div class="containerText">
+            <h2 style="font-family: sans-serif; color: lightgray;">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae praesentium earum tempora explicabo
+                molestiae. Voluptatibus tempore reprehenderit labore quidem quasi aperiam nobis adipisci, similique
+                necessitatibus, quisquam deserunt fugiat, quibusdam sequi.
+            </h2>
+        </div>
+    </div>
+
+    <script src="/js/login-validation.js"></script>
+</body>
+
+</html>

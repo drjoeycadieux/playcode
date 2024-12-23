@@ -1,0 +1,40 @@
+input[type="email"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #133a8d;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+}
+
+input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #133a8d;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+}
+
+.container {
+    width: 600px;
+}
+
+button {
+    padding: 15px;
+    background-color: rgb(22, 53, 99);
+    border: white solid 2px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 23px;
+    font-family: sans-serif;
+    color: white;
+    width: 95%;
+}
+
+button:hover {
+    background-color: rgb(21, 59, 141);
+}
