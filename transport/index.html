@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport Reservation</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            padding: 25px;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        #formContainer {
+            text-align: center;
+            padding: 25px;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            padding: 15px;
+            width: 35%;
+            border-radius: 5px;
+            border: lightblue 1px solid;
+        }
+
+        button {
+            padding: 22px;
+            border: white solid 1px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 21px;
+            width: 34%;
+            font-family: sans-serif;
+        }
+
+        button:hover {
+            background-color: lightgray;
+        }
+
+        .links {
+            color: black;
+            font-family: sans-serif;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .links:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Transport Reservation</h1>
+        <a class="links" href="/transport/register.html">Don't have an account ?</a>
+        <form id="formContainer" onsubmit="return ValidateForm()">
+            <div class="form-group">
+                <input type="email" placeholder="Enter Email" name="signInEmail" id="signInEmail">
+            </div>
+            <br>
+            <div class="form-group">
+                <input type="password" placeholder="Enter Password" name="signInPassword" id="signInPassword">
+            </div>
+
+            <p id="error-message"
+                style="color: red; font-family: sans-serif; font-weight: bold; font-size: 23px; text-decoration:  underline;">
+            </p>
+            <!-- Error message paragraph -->
+
+            <br>
+            <button type="submit">Connexion</button>
+        </form>
+    </div>
+
+    <script>
+        function ValidateForm() {
+            let email = document.forms['formContainer']['signInEmail'].value;
+            let password = document.forms['formContainer']['signInPassword'].value;
+            let errorMessage = document.getElementById('error-message');
+
+            if (email == '') {
+                errorMessage.textContent = 'Email must be filled out';
+                return false;
+            }
+
+            if (password == '') {
+                errorMessage.textContent = 'Password must be filled out';
+                return false;
+            }
+
+            let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!email.match(emailPattern)) {
+                errorMessage.textContent = 'Please enter a valid email';
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+
+</html>
