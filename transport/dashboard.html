@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport Reservation Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            color: #333;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin: 20px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .sidebar ul li a:hover {
+            color: #4CAF50;
+        }
+
+        .content-area {
+            flex: 1;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .transport-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 30%;
+            text-align: center;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            margin: 5px 0;
+        }
+
+        .card button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .card button:hover {
+            background-color: #45a049;
+        }
+
+        .booking-details table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .booking-details table th,
+        .booking-details table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .booking-details table th {
+            background-color: #f1f1f1;
+        }
+
+        .booking-details table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .search-box {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 4px;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #bookingForm {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #bookingForm input,
+        #bookingForm select {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        #bookingForm button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        #bookingForm button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <h1>Transport Reservation Dashboard</h1>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <ul>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Available Transport</a></li>
+                    <li><a href="#">Bookings</a></li>
+                    <li><a href="#">Customers</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </aside>
+
+            <div class="content-area">
+                <section class="available-transport">
+                    <h2>Available Transport</h2>
+                    <input type="text" id="searchTransport" placeholder="Search transport..." class="search-box">
+                    <div class="transport-cards" id="transportCards">
+                        <div class="card" data-transport="Bus">
+                            <h3>Bus</h3>
+                            <p>Capacity: 50</p>
+                            <p>Available: 30</p>
+                            <button class="book-btn">Book Now</button>
+                        </div>
+                        <div class="card" data-transport="Train">
+                            <h3>Train</h3>
+                            <p>Capacity: 200</p>
+                            <p>Available: 150</p>
+                            <button class="book-btn">Book Now</button>
+                        </div>
+                        <div class="card" data-transport="Flight">
+                            <h3>Flight</h3>
+                            <p>Capacity: 100</p>
+                            <p>Available: 75</p>
+                            <button class="book-btn">Book Now</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="booking-details">
+                    <h2>Recent Bookings</h2>
+                    <table id="bookingTable">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Customer Name</th>
+                                <th>Transport</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Bookings will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <h2>Book Your Transport</h2>
+            <form id="bookingForm">
+                <label for="customerName">Customer Name:</label>
+                <input type="text" id="customerName" required>
+
+                <label for="transportType">Transport Type:</label>
+                <input type="text" id="transportType" readonly>
+
+                <label for="status">Status:</label>
+                <select id="status">
+                    <option value="Pending">Pending</option>
+                    <option value="Confirmed">Confirmed</option>
+                </select>
+
+                <button type="submit">Submit Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const transportCards = document.querySelectorAll('.card');
+            const bookingTable = document.querySelector('#bookingTable tbody');
+            const searchTransportInput = document.getElementById('searchTransport');
+            const bookingModal = document.getElementById('bookingModal');
+            const closeModalBtn = document.getElementById('closeModal');
+            const bookingForm = document.getElementById('bookingForm');
+            const transportTypeInput = document.getElementById('transportType');
+
+            let bookingIdCounter = 1000;  // Start booking IDs from 1000
+
+            // Handle booking button click
+            transportCards.forEach(card => {
+                const bookBtn = card.querySelector('.book-btn');
+                bookBtn.addEventListener('click', () => {
+                    const transportName = card.getAttribute('data-transport');
+                    transportTypeInput.value = transportName;
+                    bookingModal.style.display = 'block';
+                });
+            });
+
+            // Close the modal
+            closeModalBtn.addEventListener('click', () => {
+                bookingModal.style.display = 'none';
+            });
+
+            // Handle form submission
+            bookingForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const customerName = document.getElementById('customerName').value;
+                const transportType = transportTypeInput.value;
+                const status = document.getElementById('status').value;
+
+                const newBooking = document.createElement('tr');
+                newBooking.innerHTML = `
+            <td>#${bookingIdCounter++}</td>
+            <td>${customerName}</td>
+            <td>${transportType}</td>
+            <td>${status}</td>
+        `;
+
+                bookingTable.appendChild(newBooking);
+
+                // Close the modal after booking
+                bookingModal.style.display = 'none';
+                bookingForm.reset();  // Clear the form fields
+            });
+
+            // Filter transport cards based on search input
+            searchTransportInput.addEventListener('input', function (e) {
+                const searchQuery = e.target.value.toLowerCase();
+
+                transportCards.forEach(card => {
+                    const transportName = card.getAttribute('data-transport').toLowerCase();
+                    if (transportName.includes(searchQuery)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+
+</html>
